@@ -8,7 +8,7 @@ class Bill(models.Model):
     company_name = models.CharField(max_length=100, blank=True, null=True)
     nit = models.CharField(max_length=100, blank=True, null=True)
     code = models.CharField(max_length=100, blank=True, null=True)
-    bill = models.ManyToManyField(Product)
+    product = models.ManyToManyField(Product)
     created_at = models.DateTimeField(
         auto_now_add=True, null=True, blank=True, editable=False
     )
