@@ -1,7 +1,12 @@
 from .models import Client, Product, Bill
+from django.contrib.auth.models import User
 
 
 def run_seed():
+    User.objects.create(
+        {"username": "test", "email": "test@test.com", "password": "123456"}
+    )
+
     client_data = [
         {"document": "123", "first_name": "Andres", "last_name": "Felipe"},
         {"document": "456", "first_name": "Juan", "last_name": "Gabriel"},
@@ -32,5 +37,6 @@ def run_seed():
         bill = Bill.objects.create(**bill_data[i])
         bill.product.add(product)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_seed()

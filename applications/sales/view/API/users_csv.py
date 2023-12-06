@@ -2,25 +2,25 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from django.db.models import Count
-from ...models import Client
-
 
 from django.http import HttpResponse
-from django.db.models import F, Value
+from django.db.models import F, Value, Count
 from django.db.models.functions import Concat
 
 import csv
+
+# Models
+from ...models import Client
 
 jwt = JWTAuthentication()
 
 
 class UsersCSV(APIView):
     def get(self, request, *args, **kwargs):
-        # if not jwt.authenticate(request=request):
-        #     return Response(
-        #         {"message": "Unauthorized process"}, status=status.HTTP_401_UNAUTHORIZED
-        #     )
+        if not jwt.authenticate(request=request):
+            return Response(
+                {"message": "Unauthorized process"}, status=status.HTTP_401_UNAUTHORIZED
+            )
         try:
             clients = Client.objects.values(
                 Company_name=F("bill__company_name"),
@@ -48,10 +48,10 @@ class UsersCSV(APIView):
             )
 
     def post(self, request, *args, **kwargs):
-        # if not jwt.authenticate(request=request):
-        #     return Response(
-        #         {"message": "Unauthorized process"}, status=status.HTTP_401_UNAUTHORIZED
-        #     )
+        if not jwt.authenticate(request=request):
+            return Response(
+                {"message": "Unauthorized process"}, status=status.HTTP_401_UNAUTHORIZED
+            )
         try:
             file = request.FILES["file"]
             decoded_file = file.read().decode("utf-8").splitlines()
