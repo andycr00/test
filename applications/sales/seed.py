@@ -1,11 +1,16 @@
 from .models import Client, Product, Bill
 from django.contrib.auth.models import User
+import os
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "prueba_quick.settings")
+
+import django
+
+django.setup()
 
 
 def run_seed():
-    User.objects.create(
-        {"username": "test", "email": "test@test.com", "password": "123456"}
-    )
+    User.objects.create_superuser('test', 'test@test.com', '123456')
 
     client_data = [
         {"document": "123", "first_name": "Andres", "last_name": "Felipe"},

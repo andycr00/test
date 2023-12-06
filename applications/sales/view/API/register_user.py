@@ -3,8 +3,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+
 from ...serializers import UserSerializer
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 
 from ...utils.helpers import isValidEmail
 
@@ -23,15 +24,22 @@ class UserRegister(APIView):
             return Response(serializador.errors, status=status.HTTP_400_BAD_REQUEST)
 
         data = serializador.validated_data
+        print(data)
 
         try:
             if not isValidEmail(data["email"]):
                 raise Exception("Email not valid")
 
             username = data["email"].split("@")[0]
-            User.objects.create_user(
-                username=username, password=data["password"], email=data["email"]
+
+            permissions = Permission.objects.all()
+            user = User.objects.create_user(
+                username=username,
+                password=data["password"],
+                email=data["email"],
+                is_staff=True,
             )
+            user.user_permissions.add(*permissions)
         except Exception as e:
             return Response(
                 {"status": "ERROR", "message": str(e)},
