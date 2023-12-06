@@ -27,12 +27,6 @@ python manage.py migrate
 python manage.py seed_data
 ```
 
-Estos comandos deben ser ejecutados en la raiz del proyecto. En la carpeta
-
-```
-prueba_quick\
-```
-
 Con la información ya integrada y el programa listo para comenzar, podemos correrlo y probarlo
 ```
 python manage.py runserver
