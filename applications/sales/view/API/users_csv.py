@@ -31,9 +31,7 @@ class UsersCSV(APIView):
             )
             response = HttpResponse(
                 content_type="text/csv",
-                headers={
-                    "Content-Disposition": 'attachment; filename="clients.csv"'
-                },
+                headers={"Content-Disposition": 'attachment; filename="clients.csv"'},
             )
             writer = csv.DictWriter(response, fieldnames=list(clients)[0].keys())
             writer.writeheader()
@@ -65,6 +63,6 @@ class UsersCSV(APIView):
         except Exception as e:
             print(e)
             return Response(
-                {"status": "ERROR", "message": str(e)},
+                {"status": "ERROR", "message": "Invalid file format"},
                 status=status.HTTP_400_BAD_REQUEST,
             )

@@ -115,3 +115,24 @@ localhost:8000/sales/users_csv
 ```
 
 Podremos descargar directamente el archivo, que se vera algo asi:
+![Alt text](image-1.png)
+
+Finalmente para hacer el _Cargue de Clientes_:
+
+Utilizamos el siguiente servicio:
+
+```
+method POST
+
+url localhost:8000/sales/users_csv
+
+parameters/form-data
+- file: archivo .csv con las siguientes columnas:
+    document, first_name, last_name
+```
+
+De esta forma el registrará la informacion en la base de datos y podra ser vista desde el administrado o directamente del archivo SQLite en:
+
+```
+https://inloop.github.io/sqlite-viewer/
+```
