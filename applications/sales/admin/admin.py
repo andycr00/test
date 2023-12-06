@@ -4,6 +4,7 @@ from ..models import *
 
 class ClientsAdmin(admin.ModelAdmin):
     list_display = [
+        "id",
         "document",
         "first_name",
         "last_name",
@@ -13,6 +14,7 @@ class ClientsAdmin(admin.ModelAdmin):
 
 class BillsAdmin(admin.ModelAdmin):
     list_display = [
+        "id",
         "client",
         "company_name",
         "nit",
@@ -25,6 +27,7 @@ class BillsAdmin(admin.ModelAdmin):
 
 class ProductsAdmin(admin.ModelAdmin):
     list_display = [
+        "id",
         "name",
         "description",
     ]
