@@ -32,7 +32,7 @@ class UsersCSV(APIView):
             response = HttpResponse(
                 content_type="text/csv",
                 headers={
-                    "Content-Disposition": 'attachment; filename="somefilename.csv"'
+                    "Content-Disposition": 'attachment; filename="clients.csv"'
                 },
             )
             writer = csv.DictWriter(response, fieldnames=list(clients)[0].keys())
